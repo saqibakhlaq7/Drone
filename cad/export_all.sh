@@ -4,7 +4,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 SCAD=longhaul_quad.scad
-PARTS="hub_bottom hub_top motor_mount leg battery_tray camera_mount gps_mast"
+PARTS="hub motor_mount leg battery_tray camera_mount camera_cradle gps_mast pin_hub pin_mount stack_peg stack_spacer"
 mkdir -p ../stl ../images
 RUN=""; command -v xvfb-run >/dev/null && [ -z "${DISPLAY:-}" ] && RUN="xvfb-run -a"
 IMG="--colorscheme=Tomorrow --autocenter --viewall"

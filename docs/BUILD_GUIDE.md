@@ -5,41 +5,56 @@ dangerous if done wrong.
 
 ## 1. Print the frame
 
-| Part file (`stl/`) | Qty | Orientation | Notes |
-|--------------------|-----|-------------|-------|
-| `hub_bottom.stl`   | 1 | flat, saddles up | 164 × 164 mm, fits a 220 mm bed |
-| `hub_top.stl`      | 1 | flat, saddles up | flipped over during assembly |
-| `motor_mount.stl`  | 4 | motor pad up | tree supports under the round tube sleeve only |
-| `leg.stl`          | 4 | flange on bed | |
-| `battery_tray.stl` | 1 | flat, rails up | |
-| `camera_mount.stl` | 1 | flat, cheeks up | |
-| `gps_mast.stl`     | 1 | base on bed | supports for the antenna tubes |
+**v2 is screwless.** The parts slide, twist or snap together. The only screws on
+the whole drone are the 3 per motor that come in the motor box, because a spinning
+motor has to be bolted down.
+
+| Part file (`stl/`) | Qty | Print orientation (as exported) | Supports |
+|--------------------|-----|---------------------------------|----------|
+| `hub.stl`          | 1 | upside down: top face on the bed, dovetail rails up | none (bores are teardrop-shaped) |
+| `motor_mount.stl`  | 4 | motor pad up | tree supports under the round sleeve only |
+| `leg.stl`          | 4 | standing on its foot, bayonet plug up | none |
+| `battery_tray.stl` | 1 | flat, grooves up | none |
+| `camera_mount.stl` | 1 | standing on the dovetail tongue | none |
+| `camera_cradle.stl`| 1 | floor down | none |
+| `gps_mast.stl`     | 1 | snap tenon down | small supports under the antenna tubes |
+| `pin_hub.stl`      | 5 | lying on its flat side | none |
+| `pin_mount.stl`    | 4 | lying on its flat side | none |
+| `stack_peg.stl`    | 4 | lying on its flat side | none |
+| `stack_spacer.stl` | 4 | upright | none |
 
 **Settings (PETG-CF / ASA):** 0.4 mm hardened nozzle (needed for CF filaments),
-0.2 mm layers, **4 walls**, 5 top/bottom layers, 40 % gyroid infill, 100 % infill
-around holes is ideal (use a modifier, or 6 walls). Dry the filament first. CF and
-PETG soak up moisture fast in Indian monsoon weather. Total ≈ 450 g of filament.
+0.2 mm layers, **4 walls**, 5 top/bottom layers, 40 % gyroid infill. Print the
+**pins, pegs and the camera cradle at 100 % infill**: they are the springs of the
+joints. Dry the filament first. CF and PETG soak up moisture fast in monsoon
+weather. Total ≈ 500 g of filament.
+
+**Print a test fit first.** Printers differ. Print one `pin_hub`, one `leg` and the
+`motor_mount`, then check the fits. If a joint is too tight, raise `fit`
+(default 0.2 mm) or `tube_clear` at the top of `cad/longhaul_quad.scad`. If a snap
+is too loose, lower them. Then re-export.
 
 **Changing the design:** open `cad/longhaul_quad.scad` in OpenSCAD (free).
-Everything is set at the top of the file: `tube_od`, `wheelbase`, `cam_w`,
-`pack_l/pack_w`, `leg_len` and more. Then run `cad/export_all.sh`.
+Everything is set at the top: `tube_od`, `wheelbase`, `cam_w`, `pack_l/pack_w`,
+`leg_len`, `fit` and more. Then run `cad/export_all.sh` (STLs + images) and
+`python3 tools/make_models.py` (DXF drawings + USDZ).
 
-## 2. Prepare arms and motors
+## 2. How the joints work
 
-1. Cut the four carbon tubes to **212 mm** (fine hacksaw, wrapped in masking tape). Wear a mask and work outdoors.
-   Carbon dust is harmful.
-2. Dry-fit each tube into the hub saddle and the motor mount sleeve. It should be a firm push fit.
-   If it is too tight, sand the print. If it is too loose, wrap one layer of tape.
-3. **Pin each tube**: with the tube in the motor mount, drill through the 3.3 mm hole
-   (36 mm behind the motor axis). Then put the tube in the hub sandwich and drill
-   through the hub's tube-pin hole (70 mm from centre). The pins stop the arms
-   twisting, so the motors stay level.
-4. Melt two **M3 heat-set inserts** into the bottom of each motor mount (soldering iron at ~230 °C).
-5. Bolt each motor to its mount (3 × M3 × 8 in the triangle slots). **Check the screws
-   cannot touch the windings.** Spin the bell by hand.
-6. Extend each motor's 3 wires with 16 AWG silicone wire so they reach about 60 mm past the
-   inner end of the tube. Solder, heat-shrink, and stagger the joints so the bundle is slim.
-   Pull the wires through the tube (use a string).
+| Joint | Type | How to assemble | How to take apart |
+|-------|------|-----------------|-------------------|
+| Arm → hub | **slide-in socket + snap pin** | Slide the carbon tube into the hub socket until it stops, push `pin_hub` down through the pin hole until it clicks | Squeeze the two halves of the pin tip under the hub, push it out |
+| Arm → motor mount | **slide-on sleeve + snap pin** | Slide the mount onto the tube end, push `pin_mount` through until it clicks | Same as above |
+| Leg → motor mount | **bayonet twist-lock** | Line up the 2 lugs with the slots, push up, **twist 45° clockwise** (seen from below) | Twist back, pull down |
+| Battery tray → hub | **dovetail slide + flexure latch** | Slide the tray onto the two rails under the hub from the left side (−Y). It clicks when it reaches the end stop | Press the thumb tab down and slide the tray out |
+| Camera → cradle | **snap-in clip** | Press the camera down between the cradle walls until the lips click over it | Spread the walls |
+| Cradle → camera mount | **snap trunnions** | Spread the cheeks slightly, let the trunnions drop into the holes. Tilt is held by friction | Spread the cheeks |
+| Camera mount → hub | **dovetail slide + snap pin** | Slide the tongue sideways into the groove across the front face. Centre it, then push a `pin_hub` down through the hub's front pin hole | Pull the pin, slide out |
+| GPS mast → hub | **snap-fit tenon** | Push the square tenon into the socket at the rear of the hub top until the hooks click | Squeeze the two prongs from inside the battery-lead hole, lift |
+| FC/ESC stack → hub | **snap pegs + spacers** | Click 4 `stack_peg` into the top skin, drop on the ESC, 4 `stack_spacer`, then the FC with its rubber grommets. Press until the top barbs click | Squeeze each barb |
+
+Snap pins and pegs are cheap (< 1 g). **Print spares and replace any pin that turns
+white or loose.** Never re-use a cracked pin on the arms.
 
 ## 3. Assemble the frame
 
@@ -55,18 +70,32 @@ Everything is set at the top of the file: `tube_od`, `wheelbase`, `cam_w`,
    M3 (CCW)      M1 (CW)
 ```
 
-1. Lay `hub_bottom` on the bench, saddles up. Push the four arms into the grooves with
-   the inner tube ends at the groove start. Feed the motor wires up through the wire holes.
-2. Put `hub_top` on, saddles down. Bolt everything with **M3 × 30 + nylock nuts**:
-   16 clamp bolts, 4 boss bolts and 4 tube pins. Tighten in a cross pattern until
-   the tube cannot turn. **Don't crush the plates**: the 0.8 mm gap should almost close.
-3. Bolt the legs under the motor mounts (M3 × 10 into the inserts).
-4. Bolt `battery_tray` under the hub (4 × M3 × 12 + nuts), rails pointing down. Stick an
-   anti-slip pad on it and thread the two battery straps through the slots.
-5. Bolt `camera_mount` under the front of the hub (2 × M3 × 12). Fit the camera with its M2
-   side screws at about **15–25° up-tilt**. This drone flies slowly, so it needs little tilt.
-6. Bolt `gps_mast` to the rear of the top plate. Stick the GPS on top, **arrow forward**.
+1. **Cut** the four carbon tubes to **219 mm** (fine hacksaw, wrapped in masking tape).
+   Wear a mask and work outdoors. Carbon dust is harmful.
+2. **Drill the pin holes in the tubes (4.3 mm).** Slide a tube fully into a hub socket
+   and drill through the hub's pin hole (70 mm from the centre), using the printed hole
+   as a guide. Then slide the motor mount onto the other end, flush against its stop,
+   and drill through the mount's pin hole. **Check the motor pad is level with the hub
+   top before you drill the second hole.** These pins stop the arms twisting.
+3. **Motors:** fix each motor to its mount with the **3 screws supplied with the motor**
+   (Tarot triangle slots). Check the screws cannot touch the windings, then spin the
+   bell by hand.
+4. **Wires:** extend each motor's 3 wires with 16 AWG silicone wire so they reach about 60 mm
+   past the inner end of the tube. Solder, heat-shrink, and stagger the joints so the
+   bundle is slim. Feed them down the centre hole of the mount, through the tube, and up
+   out of the hub's wire hole.
+5. **Arms:** slide each tube into the hub, motor end out, and click in the 8 snap pins
+   (4 hub, 4 mounts).
+6. **Legs:** bayonet each leg into a motor mount (push, twist 45°).
+7. **Stack:** click the 4 pegs into the hub top, then ESC → spacers → FC (arrow forward).
+8. **GPS mast:** click it into the rear socket. Stick the GPS on top, **arrow forward**.
    Run the receiver's T-antenna through the two angled tubes.
+9. **Camera:** click the camera into the cradle, snap the cradle into the mount, slide the
+   mount into the front dovetail and lock it with a pin. Set the tilt to about **15–25° up**.
+   This drone flies slowly, so it needs little tilt.
+10. **Battery:** strap the pack to the tray (2 straps through the slots, anti-slip pad
+    between them). Then slide the tray onto the hub rails until it clicks. Battery swaps
+    take seconds: press the tab, slide out, slide a fresh pack in.
 
 ## 4. Build the 6S4P battery
 
@@ -119,8 +148,8 @@ the sun and never in a parked car.
   **SpeedyBee F405 V4 manual** that came with the stack. The receiver and the HD-VTX plug have
   their own labelled pads.
 * Keep motor and battery wires **away from the GPS mast and compass**.
-* Mount the stack on the top plate with the supplied rubber grommets, **arrow forward**.
-* Mount the Walksnail VTX on the top plate next to the stack (zip-tie slots). It needs
+* Mount the stack on the printed snap pegs and spacers (with the FC's rubber grommets), **arrow forward**.
+* Mount the Walksnail VTX on the hub top next to the stack (zip-tie slots). It needs
   airflow, so don't wrap it.
 * Mount the VTX antenna on the rear, pointing up and back, clear of the carbon.
 
@@ -176,9 +205,10 @@ on the big props, flash **Bluejay** (esc-configurator.com) and raise
    Swap any two wires of a motor to reverse it.
 2. Balance all props on the balancer (big props + vibration = jello in the video).
 3. Check the centre of gravity: lift the drone by two fingers under the hub centre. It should
-   hang level. Slide the battery forward or back in the straps to fix it.
-4. Range-check the radio (ELRS power 100 mW at first) and set up the failsafe.
-5. Bind the Walksnail VTX to the goggles. Set a channel/power legal in your area.
+   hang level. Slide the pack forward or back under its straps to fix it.
+4. Pull hard on each arm, leg and the tray. Nothing may move. Replace any loose pin.
+5. Range-check the radio (ELRS power 100 mW at first) and set up the failsafe.
+6. Bind the Walksnail VTX to the goggles. Set a channel/power legal in your area.
 
 ## 8. First flights
 

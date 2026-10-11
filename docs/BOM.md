@@ -17,7 +17,7 @@ Quantities are for **one drone + 1 spare prop set**.
 | 1 | **Tarot 4108 380KV** multirotor motor (sold by IDUINO, Tarot-made) | A low-KV, large-stator motor is very efficient on 13" props. 90 g, up to 1.62 kg thrust each on 6S | 4 | [B0DQHPYGKH](https://www.amazon.in/IDUINO-4108-Multi-Rotor-Multicopter-Quadcopter/dp/B0DQHPYGKH) · [search](https://www.amazon.in/s?k=4108+380KV+motor) | ₹3,299 each |
 | 2 | **13" carbon-fibre props 1355** (CW+CCW pair) | Big, slow props are what make 60+ min possible | 3 pairs (1 spare) | [B07WTWQ961](https://www.amazon.in/ELECTROPRIME-High-end-Carbon-Fiber-Propeller/dp/B07WTWQ961) · [search](https://www.amazon.in/s?k=1355+carbon+propeller) | check |
 | 2b | *Alt:* 12" HD Propellers 1238 carbon-nylon pair | Cheaper and tougher, about 5–8 % less flight time | 3 pairs | [B0C1XBMSC5](https://www.amazon.in/Propellers-12X3-8-Carbon-Nylon-1CCW-1pair/dp/B0C1XBMSC5) | check |
-| 3 | **Carbon-fibre tube 16 × 12 × 500 mm** (2-pack) | Arms. Each 500 mm tube gives two 212 mm arms | 2 packs (4 tubes) | [B0DDFRQQ87](https://www.amazon.in/Quadcopter-Hexacopter-Landing-Multicopter-16X12X500mm/dp/B0DDFRQQ87) · [search](https://www.amazon.in/s?k=16mm+carbon+fiber+tube+500mm) | check |
+| 3 | **Carbon-fibre tube 16 × 12 × 500 mm** (2-pack) | Arms. Each 500 mm tube gives two 219 mm arms | 2 packs (4 tubes) | [B0DDFRQQ87](https://www.amazon.in/Quadcopter-Hexacopter-Landing-Multicopter-16X12X500mm/dp/B0DDFRQQ87) · [search](https://www.amazon.in/s?k=16mm+carbon+fiber+tube+500mm) | check |
 | 3b | *Alt:* ARRIS 18 mm OD × 16 mm ID × 500 mm tube (2-pack) | If you use this one, set `tube_od = 18` in the CAD file and re-export | 2 packs | [B00RX7TVVW](https://www.amazon.in/ARRIS-Wrapped-Carbon-Glossy-Surface/dp/B00RX7TVVW) | check |
 | 4 | **SpeedyBee F405 V4 stack** (F405 FC + 55A 4-in-1 ESC, 30×30) | 3–6S, has a barometer, Bluetooth setup, an HD-VTX plug and blackbox. Runs ArduPilot and INAV | 1 | [B0CL3ZCWJW](https://www.amazon.in/SPEEDY-BEE-F405-V4-Controller/dp/B0CL3ZCWJW) · [search](https://www.amazon.in/s?k=speedybee+f405+v4+stack) | check |
 | 4b | *Alt:* SpeedyBee F405 V3 BLS 50A stack | Same mounting, works just as well | 1 | [B0CW6GWHVY](https://www.amazon.in/REES52-SpeedyBee-F405-30x30-Stack/dp/B0CW6GWHVY) | check |
@@ -77,21 +77,18 @@ of this size was on Amazon.in, so you build it. See the [Build guide](BUILD_GUID
 
 | # | Part | Why | Qty | Amazon.in | ≈ Price |
 |---|------|-----|-----|-----------|---------|
-| 21 | **PETG-CF filament** 1.75 mm, 1 kg (needs a hardened nozzle) | Stiff, heat-resistant, light. The frame uses about 450 g | 1 kg | [IEMAI B09XPXD1XD](https://www.amazon.in/IEMAI-Reinforced-Resistance-Industrial-Functional/dp/B09XPXD1XD) | ≈ ₹4,433 |
+| 21 | **PETG-CF filament** 1.75 mm, 1 kg (needs a hardened nozzle) | Stiff, heat-resistant, light. The frame uses about 500 g | 1 kg | [IEMAI B09XPXD1XD](https://www.amazon.in/IEMAI-Reinforced-Resistance-Industrial-Functional/dp/B09XPXD1XD) | ≈ ₹4,433 |
 | 21b | *Alt:* Polymaker ASA (brass nozzle OK, enclosure recommended) or plain PETG | ASA survives Indian summer heat. **Do not use PLA**, which softens in a hot car | 1 kg | [ASA B09DKN3S9J](https://www.amazon.in/Polymaker-Filament-Resistant-Weather-Cardboard/dp/B09DKN3S9J) · [PETG search](https://www.amazon.in/s?k=petg+filament+1.75mm) | ≈ ₹4,780 |
-| 22 | M3 brass heat-set inserts (M3 × 5 mm) | Motor-mount legs | 1 pack | [B0CH32W3W5](https://www.amazon.in/Threaded-Inserts-Embedment-Printing-Automotive/dp/B0CH32W3W5) | check |
-| 23 | M3 socket-head screw kit (stainless) incl. nylock nuts & washers | General assembly | 1 kit | [OnlyScrews M3/M4 kit](https://www.amazon.in/s?k=OnlyScrews+M3+M4+3D+printer+screw+assortment) | ≈ ₹2,240 |
-| 24 | **M3 × 30 mm** socket-head screws + M3 nylock nuts | 28 needed: 16 arm clamps, 4 spacer bosses, 4 hub tube pins, 4 motor-mount tube pins | 40 + 40 | [search](https://www.amazon.in/s?k=M3+x+30mm+socket+head+screw+stainless) | check |
-| 25 | M3 × 8 mm (motors, 12 pcs) and M3 × 10–12 mm screws + nuts (legs 8, battery tray 4, camera mount 2, GPS mast 2) | Small fixings | 15 + 20 | (in kit #23) | |
-| 26 | Battery straps, 20–25 mm × 300 mm, rubberised | Hold the pack | 2 (+1 spare) | [search](https://www.amazon.in/s?k=lipo+battery+strap+20mm+300mm) | check |
-| 27 | Anti-slip silicone/foam pad (2–3 mm) | Under the battery and the stack | 1 | [search](https://www.amazon.in/s?k=anti+slip+silicone+pad+sheet) | check |
-| 28 | Zip ties (small), 3 mm heat-shrink, double-sided foam tape | Wiring | 1 each | [search](https://www.amazon.in/s?k=zip+ties+small) | check |
-| 29 | 16 AWG silicone wire, red/black 1 m | Extending motor leads through the arms | 1 m each | [search](https://www.amazon.in/s?k=16+AWG+silicone+wire) | check |
+| 22 | *(none: v2 is screwless)* | Arms, legs, tray, camera, GPS and stack join with printed slides, snap pins, bayonets and dovetails. The only screws are the 3 per motor **supplied with the motors** | — | — | ₹0 |
+| 23 | Battery straps, 20–25 mm × 300 mm, rubberised | Hold the pack | 2 (+1 spare) | [search](https://www.amazon.in/s?k=lipo+battery+strap+20mm+300mm) | check |
+| 24 | Anti-slip silicone/foam pad (2–3 mm) | Under the battery and the stack | 1 | [search](https://www.amazon.in/s?k=anti+slip+silicone+pad+sheet) | check |
+| 25 | Zip ties (small), 3 mm heat-shrink, double-sided foam tape | Wiring | 1 each | [search](https://www.amazon.in/s?k=zip+ties+small) | check |
+| 26 | 16 AWG silicone wire, red/black 1 m | Extending motor leads through the arms | 1 m each | [search](https://www.amazon.in/s?k=16+AWG+silicone+wire) | check |
 
 ## 7. Tools (if you don't have them)
 
-Soldering iron (60 W+, e.g. TS101 or similar), multimeter, hex driver set (1.5/2/2.5 mm),
-drill + 3.3 mm bit (to pin the carbon tubes; wear a mask), a prop balancer, and
+Soldering iron (60 W+, e.g. TS101 or similar), multimeter, 2 mm hex key (motor screws),
+drill + 4.3 mm bit (for the snap-pin holes in the carbon tubes; wear a mask), a prop balancer, and
 a USB-C cable to set up the flight controller.
 
 ## Rough budget
@@ -103,7 +100,7 @@ a USB-C cable to set up the flight controller.
 | Walksnail kit + goggles | 45,000 – 70,000 (analog: 10,000 – 15,000) |
 | 26 cells + pack materials + welder | 25,000 – 35,000 |
 | Charger | 9,000 – 19,000 |
-| Filament + hardware | 6,000 – 9,000 |
+| Filament + wiring bits | 5,000 – 7,000 |
 | **Total** | **≈ ₹1.3 – 1.9 lakh** (≈ ₹75k–1 lakh with analog video) |
 
 These figures are estimates. Re-price them when you order.

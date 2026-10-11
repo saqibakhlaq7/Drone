@@ -15,8 +15,8 @@ motor, prop adapters and ESC losses.  The script prints a range.
 """
 
 AIRFRAME = {
-    "printed parts (PETG-CF, see tools/stl_stats.py)": 445,
-    "4x carbon tube 16x12 mm, 212 mm long": 114,
+    "printed parts incl. snap pins (PETG-CF, see tools/stl_stats.py)": 498,
+    "4x carbon tube 16x12 mm, 219 mm long": 118,
     "4x Tarot 4108 380KV motors": 360,
     "4x 13 inch carbon props + adapters": 92,
     "FC + 4-in-1 ESC stack": 30,
@@ -24,7 +24,7 @@ AIRFRAME = {
     "ELRS receiver + antenna": 3,
     "GPS + compass module": 12,
     "power wiring, XT60, capacitor": 60,
-    "bolts, nuts, heat inserts, straps": 50,
+    "motor screws (supplied with motors) + battery straps": 15,
 }
 
 CELL = {"name": "Molicel P50B 21700", "mass_g": 70, "Wh": 18.0}   # 3.6 V x 5.0 Ah

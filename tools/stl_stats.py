@@ -25,7 +25,7 @@ def load_ascii_stl(path):
 
 def main(stl_dir):
     total = 0.0
-    qty = {"motor_mount": 4, "leg": 4}
+    qty = {"motor_mount": 4, "leg": 4, "pin_hub": 5, "pin_mount": 4, "stack_peg": 4, "stack_spacer": 4}
     print(f"{'part':14s} {'size X x Y x Z (mm)':>24s} {'cm3':>7s} {'g each':>7s} {'qty':>4s}")
     for path in sorted(glob.glob(os.path.join(stl_dir, "*.stl"))):
         tri = load_ascii_stl(path)
