@@ -84,6 +84,7 @@ def jobs():
         j.append((f'projection() print_part("{p}");', os.path.join(DXF_DIR, "parts", f"{p}.dxf")))
         j.append((f'projection() multmatrix({VIEWS["RIGHT"]}) print_part("{p}");',
                   os.path.join(TMP, f"side_{p}.dxf")))
+    j.append(("prop_model();", os.path.join(TMP, "prop.stl")))
     return j
 
 
@@ -233,6 +234,37 @@ def build_usdz():
     return out
 
 
+def build_glb():
+    """Drone for the web animation: static body + ONE prop mesh (instanced 4x by the page).
+    glTF convention: metres, Y up. Drone nose = +X."""
+    scene = trimesh.Scene()
+
+    def to_gltf(m):
+        m = m.copy()
+        m.merge_vertices()
+        v = np.asarray(m.vertices) / 1000.0
+        m.vertices = np.column_stack([v[:, 0], v[:, 2], -v[:, 1]])
+        return trimesh.graph.smooth_shade(m, angle=np.radians(35))
+
+    def material(rgb, metal, rough):
+        return trimesh.visual.material.PBRMaterial(
+            baseColorFactor=[*rgb, 1.0], metallicFactor=metal, roughnessFactor=rough)
+
+    for name, _, rgb, metal, rough, _ in ASM:
+        if name == "props":
+            continue
+        m = to_gltf(trimesh.load(os.path.join(TMP, f"asm_{name}.stl")))
+        m.visual = trimesh.visual.TextureVisuals(material=material(rgb, metal, rough))
+        scene.add_geometry(m, geom_name=name, node_name=name)
+    prop = to_gltf(trimesh.load(os.path.join(TMP, "prop.stl")))
+    prop.visual = trimesh.visual.TextureVisuals(material=material((0.08, 0.08, 0.09), 0.2, 0.35))
+    scene.add_geometry(prop, geom_name="prop", node_name="prop")
+    out = os.path.join(ROOT, "animation", "drone.glb")
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    scene.export(out, include_normals=True)
+    return out
+
+
 def main():
     os.makedirs(os.path.join(DXF_DIR, "parts"), exist_ok=True)
     todo = jobs()
@@ -242,6 +274,7 @@ def main():
             pass
     print("DXF :", build_dxf())
     print("USDZ:", build_usdz())
+    print("GLB :", build_glb())
 
 
 if __name__ == "__main__":

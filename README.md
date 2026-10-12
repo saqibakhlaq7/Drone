@@ -29,8 +29,26 @@ Every electronic part, the remote and the goggles were found on **Amazon.in**.
 | [`dxf/longhaul520_drawings.dxf`](dxf/longhaul520_drawings.dxf) | **Complete drawing sheet**: front, top and right views of the assembly (one layer per component), every printed part (top + side outline), key dimensions, title block. mm, 1:1 | AutoCAD, LibreCAD (free), DraftSight, Fusion 360, QCAD |
 | [`dxf/parts/*.dxf`](dxf/parts) | Flat outline of each printed part, one file each | any CAD / laser cutter software |
 | [`stl/*.stl`](stl) | Ready-to-print parts, already in print orientation | any slicer (Cura, PrusaSlicer, Bambu Studio …) |
+| [`media/longhaul520_takeoff_landing.mp4`](media/longhaul520_takeoff_landing.mp4) | **33 s take-off → climb → hover → landing animation** with sound, 1280×720 | any video player |
+| [`animation/index.html`](animation/index.html) | The same flight, live and interactive in the browser (real-time 3D, loops) | serve the folder (`npx http-server animation`) and open it |
 
 ![drawing sheet](images/drawing_sheet.png)
+
+## Flight animation
+
+[![take-off and landing](images/animation_poster.jpg)](media/longhaul520_takeoff_landing.mp4)
+
+The animation flies the real CAD model with a small physics model. **It is a simulation,
+not footage.**
+- **Thrust:** comes from each motor's RPM (T = k·rpm², with 1.62 kgf at full RPM). The motors take time to spin up and down.
+- **Ground effect:** near the pad the props push off the ground and get extra lift.
+- **Landing gear:** the legs act as a spring and damper when the drone sets down.
+- **Altitude:** a controller holds height while following a smooth climb and descent profile.
+- **Wind:** gusts push the drone around, and GPS position hold corrects them with small tilts.
+- **Telemetry:** the on-screen readings come from the same 2.98 kg / 9.5 g/W numbers as [`tools/endurance.py`](tools/endurance.py).
+- **Sound:** generated from the simulated motor RPM, not recorded.
+
+Regenerate: `python3 tools/make_models.py` (GLB) → `NODE_PATH=$(npm root -g) node animation/record.cjs` → `python3 tools/make_video.py`.
 
 ## How it goes together without screws
 
@@ -72,7 +90,8 @@ and re-run it to see the new flight time.
 | [`docs/BUILD_GUIDE.md`](docs/BUILD_GUIDE.md) | Printing, the joints, assembly, battery build, wiring, ArduPilot setup, first flights, Indian drone rules |
 | [`cad/longhaul_quad.scad`](cad/longhaul_quad.scad) | Parametric OpenSCAD source (tube size, wheelbase, camera width, battery size, joint `fit` …) |
 | [`cad/export_all.sh`](cad/export_all.sh) | Regenerates every STL + preview image |
-| [`tools/make_models.py`](tools/make_models.py) | Regenerates the DXF drawings and the USDZ model |
+| [`tools/make_models.py`](tools/make_models.py) | Regenerates the DXF drawings, the USDZ model and `animation/drone.glb` |
+| [`animation/`](animation) + [`tools/make_video.py`](tools/make_video.py) | 3D flight simulation page, frame recorder, sound synthesis + MP4 encode |
 | [`tools/endurance.py`](tools/endurance.py) | Weight & flight-time calculator |
 | [`tools/stl_stats.py`](tools/stl_stats.py) | Size and printed weight of every part |
 
