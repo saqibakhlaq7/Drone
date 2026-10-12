@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LongHaul-520 Flight</title>
+<style>
+  :root {
+    --hud-bg: rgba(8, 12, 16, 0.55);
+    --hud-fg: #e8f1f5;
+    --hud-dim: #9fb3bf;
+    --hud-accent: #ffb547;
+    --rec: #ff3b30;
+  }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #0b0f12; }
+  canvas { display: block; }
+  #vignette {
+    position: fixed; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.38) 100%);
+  }
+  .hud {
+    position: fixed; color: var(--hud-fg);
+    font: 500 13px/1.45 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    letter-spacing: 0.02em; pointer-events: none;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  }
+  #telemetry {
+    top: 18px; left: 18px; padding: 10px 14px; border-radius: 8px;
+    background: var(--hud-bg); backdrop-filter: blur(4px); min-width: 210px;
+  }
+  #telemetry .title { color: var(--hud-accent); font-weight: 700; margin-bottom: 4px; }
+  #telemetry .row { display: flex; justify-content: space-between; gap: 18px; }
+  #telemetry .row span:first-child { color: var(--hud-dim); }
+  #rec { top: 18px; right: 22px; display: flex; align-items: center; gap: 8px; }
+  #rec .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--rec); }
+  #caption {
+    left: 50%; bottom: 34px; transform: translateX(-50%);
+    padding: 8px 16px; border-radius: 6px; background: var(--hud-bg);
+    font-size: 16px; white-space: nowrap;
+  }
+  #brand { left: 18px; bottom: 16px; color: var(--hud-dim); font-size: 11px; }
+  #loading { inset: 0; display: flex; align-items: center; justify-content: center; font-size: 15px; }
+  @media (max-width: 600px) {
+    .hud { font-size: 11px; }
+    #telemetry { min-width: 160px; padding: 8px 10px; }
+    #caption { font-size: 13px; bottom: 22px; white-space: normal; text-align: center; width: calc(100% - 32px); box-sizing: border-box; }
+  }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="vignette"></div>
+<div id="telemetry" class="hud">
+  <div class="title">LONGHAUL-520 · SIM</div>
+  <div class="row"><span>MODE</span><span id="t-mode">-</span></div>
+  <div class="row"><span>ALT</span><span id="t-alt">-</span></div>
+  <div class="row"><span>V/S</span><span id="t-vs">-</span></div>
+  <div class="row"><span>THR</span><span id="t-thr">-</span></div>
+  <div class="row"><span>RPM</span><span id="t-rpm">-</span></div>
+  <div class="row"><span>BATT</span><span id="t-bat">-</span></div>
+  <div class="row"><span>POWER</span><span id="t-pwr">-</span></div>
+</div>
+<div id="rec" class="hud"><div class="dot"></div><span id="t-time">00:00.0</span></div>
+<div id="caption" class="hud">Loading…</div>
+<div id="brand" class="hud">LongHaul-520 · 2.98 kg · 13" props · 6S4P Li-ion · physics-based simulation</div>
+<script type="module" src="./flight.js"></script>
+</body>
+</html>
